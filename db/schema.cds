@@ -18,6 +18,18 @@ entity Books : managed {
         currency : Currency;
 }
 
+@Aggregation.ApplySupported.PropertyRestrictions: true
+view BooksAnalytics as select from Books {
+  key ID,
+  @Analytics.Dimension: true
+  genre,
+  @Analytics.Measure: true
+  @Aggregation.default: #SUM
+  price,
+  @Analytics.Dimension: true
+  currency
+};
+
 entity Authors : managed {
     key ID           : Integer;
         name         : String(111);
