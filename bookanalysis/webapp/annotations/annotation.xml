@@ -41,12 +41,12 @@
                 </Annotation>
                 <Annotation Term="UI.Chart">
                     <Record Type="UI.ChartDefinitionType">
-                        <PropertyValue Property="Title" String="BookPrice by Genre"/>
-                        <PropertyValue Property="Description" String="BookPrice by Genre"/>
+                        <PropertyValue Property="Title" String="{@i18n>bookpriceByGenre}"/>
+                        <PropertyValue Property="Description" String="{@i18n>bookpriceByGenre}"/>
                         <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Column"/>
                         <PropertyValue Property="Dimensions">
                             <Collection>
-                                <PropertyPath>genre/descr</PropertyPath>
+                                <PropertyPath>genre_ID</PropertyPath>
                             </Collection>
                         </PropertyValue>
                         <PropertyValue Property="Measures">
@@ -58,7 +58,7 @@
                 </Annotation>
                 <Annotation Term="UI.PresentationVariant">
                     <Record Type="UI.PresentationVariantType">
-                        <PropertyValue Property="Text" String="Default"/>
+                        <PropertyValue Property="Text" String="{@i18n>default}"/>
                         <PropertyValue Property="SortOrder">
                             <Collection>
                                 <Record Type="Common.SortOrderType">
@@ -68,11 +68,63 @@
                             </Collection>
                         </PropertyValue>
                         <PropertyValue Property="IncludeGrandTotal" Bool="true"/>
-                        <PropertyValue Property="InitialExpansionLevel" Int="NaN"/>
                         <PropertyValue Property="Visualizations">
                             <Collection>
                                 <AnnotationPath>@UI.LineItem</AnnotationPath>
                                 <AnnotationPath>@UI.Chart</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>ID</PropertyPath>
+                        <PropertyPath>author_ID</PropertyPath>
+                        <PropertyPath>price</PropertyPath>
+                        <PropertyPath>currency_code</PropertyPath>
+                        <PropertyPath>author_ID</PropertyPath>
+                        <PropertyPath>genre_ID</PropertyPath>
+                        <PropertyPath>title</PropertyPath>
+                    </Collection>
+                </Annotation>
+                <Annotation Term="UI.Chart" Qualifier="FilterGenreStock">
+                    <Record Type="UI.ChartDefinitionType">
+                        <PropertyValue Property="Title" String="{@i18n>stockByGenre}"/>
+                        <PropertyValue Property="Description" String="{@i18n>stockByGenre}"/>
+                        <PropertyValue Property="ChartType" EnumMember="UI.ChartType/Bar"/>
+                        <PropertyValue Property="Dimensions">
+                            <Collection>
+                                <PropertyPath>genre_ID</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="Measures">
+                            <Collection>
+                                <PropertyPath>stock</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="UI.PresentationVariant" Qualifier="PVStockByGenre">
+                    <Record Type="UI.PresentationVariantType">
+                        <PropertyValue Property="Visualizations">
+                            <Collection>
+                                <AnnotationPath>@UI.Chart#FilterGenreStock</AnnotationPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="AdminService.Books/genre_ID">
+                <Annotation Term="Common.ValueList">
+                    <Record Type="Common.ValueListType">
+                        <PropertyValue Property="CollectionPath" String="Books"/>
+                        <PropertyValue Property="PresentationVariantQualifier" String="PVStockByGenre2"/>
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="genre_ID"/>
+                                    <PropertyValue Property="ValueListProperty" String="genre_ID"/>
+                                </Record>
                             </Collection>
                         </PropertyValue>
                     </Record>

@@ -22,10 +22,10 @@ entity Books : managed {
 view BooksAnalytics as select from Books {
   key ID,
   @Analytics.Dimension: true
-  genre,
+  price,
   @Analytics.Measure: true
   @Aggregation.default: #SUM
-  price,
+  genre.descr,
   @Analytics.Dimension: true
   currency
 };
